@@ -24,15 +24,31 @@ export class ProposalService {
     return this.proposals.asObservable();
   }
 
-  addProposal(proposal: Proposal): void {
-    let currentProposals: Proposal[] = [];
-    currentProposals = this.proposals.value;
-    const newProposal = {
-      ...proposal,
-      id: this.generateId(currentProposals),
-    };
-    this.proposals.next([...currentProposals, newProposal]);
-    this.saveProposals();
+  addProposal(proposal: Proposal, files: File[]): void {
+    const formData = new FormData();
+    formData.append("name", proposal.name);
+    formData.append("yeshiva", proposal.yeshiva);
+    formData.append("shadchan", proposal.shadchan);
+    formData.append("details", proposal.details);
+    formData.append("notes", proposal.notes);
+    formData.append("id", proposal.id.toString());
+
+    // הוספת קבצים ל-FormData
+    files.forEach((file) => {
+      if (file.type.startsWith("image/")) {
+        formData.append("image", file);
+      } else if (file.type === "application/pdf") {
+        formData.append("pdf", file);
+      }
+    });
+
+    this.http.post(this.dataPath, formData).subscribe({
+      next: (response) => {
+        console.log("Proposal added successfully", response);
+        this.loadProposals();
+      },
+      error: (error) => console.error("Error adding proposal:", error),
+    });
   }
 
   updateProposal(proposal: Proposal): void {
@@ -49,12 +65,6 @@ export class ProposalService {
     const currentProposals = this.proposals.value;
     this.proposals.next(currentProposals.filter((p) => p.id !== id));
     this.saveProposals();
-  }
-
-  private generateId(proposals: Proposal[] = []): number {
-    return proposals.length > 0
-      ? Math.max(...proposals.map((p) => p.id || 0)) + 1
-      : 1;
   }
 
   private saveProposals(): void {

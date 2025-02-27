@@ -1,5 +1,5 @@
 export interface Proposal {
-  id?: number;
+  id: number;
   name: string;
   yeshiva: string;
   shadchan: string;
