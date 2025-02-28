@@ -20,10 +20,11 @@ export class ProposalService {
     });
   }
 
+  // get propsals
   getProposals(): Observable<Proposal[]> {
     return this.proposals.asObservable();
   }
-
+  // add propsal
   addProposal(proposal: Proposal, files: File[]): void {
     const formData = new FormData();
     formData.append("name", proposal.name);
