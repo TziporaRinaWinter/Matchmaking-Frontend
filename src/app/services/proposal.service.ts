@@ -34,7 +34,7 @@ export class ProposalService {
     formData.append("notes", proposal.notes);
     formData.append("id", proposal.id.toString());
 
-    // הוספת קבצים ל-FormData
+    // Add the files to FormData
     files.forEach((file) => {
       if (file.type.startsWith("image/")) {
         formData.append("image", file);
@@ -62,7 +62,7 @@ export class ProposalService {
     }
   }
 
-  deleteProposal(id: number): void {
+  deleteProposal(id: string): void {
     const currentProposals = this.proposals.value;
     this.proposals.next(currentProposals.filter((p) => p.id !== id));
     this.saveProposals();
