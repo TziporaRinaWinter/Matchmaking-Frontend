@@ -61,7 +61,7 @@ export class ProposalService {
       this.saveProposals();
     }
   }
-
+  // delete proposal
   deleteProposal(id: string): void {
     const currentProposals = this.proposals.value;
     this.proposals.next(currentProposals.filter((p) => p.id !== id));
