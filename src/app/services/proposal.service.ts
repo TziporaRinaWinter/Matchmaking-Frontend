@@ -52,6 +52,7 @@ export class ProposalService {
     });
   }
 
+  // Update proposal
   updateProposal(proposal: Proposal): void {
     const currentProposals = this.proposals.value;
     const index = currentProposals.findIndex((p) => p.id === proposal.id);
@@ -68,6 +69,7 @@ export class ProposalService {
     this.saveProposals();
   }
 
+  // Save proposal
   private saveProposals(): void {
     this.http.post(this.dataPath, this.proposals.value).subscribe({
       next: () => console.log(),
