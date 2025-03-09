@@ -26,7 +26,7 @@ export class ProposalService {
   }
 
   // add proposal
-  addProposal(proposal: Proposal, files: File[]): void {
+  addProposal(proposal: Proposal): void {
     const formData = new FormData();
     formData.append("name", proposal.name);
     formData.append("yeshiva", proposal.yeshiva);
@@ -35,13 +35,13 @@ export class ProposalService {
     formData.append("notes", proposal.notes);
 
     // Add the files to FormData
-    files.forEach((file) => {
-      if (file.type.startsWith("image/")) {
-        formData.append("imageFile", file);
-      } else if (file.type === "application/pdf") {
-        formData.append("documentFile", file);
-      }
-    });
+    // files.forEach((file) => {
+    //   if (file.type.startsWith("image/")) {
+    //     formData.append("imageFile", file);
+    //   } else if (file.type === "application/pdf") {
+    //     formData.append("documentFile", file);
+    //   }
+    // });
 
     this.http.post(this.dataPath, formData).subscribe({
       next: (response) => {
@@ -53,7 +53,7 @@ export class ProposalService {
   }
 
   // Update proposal
-  updateProposal(proposal: Proposal, files: File[]): void {
+  updateProposal(proposal: Proposal): void {
     const formData = new FormData();
     formData.append("name", proposal.name);
     formData.append("yeshiva", proposal.yeshiva);
@@ -62,13 +62,13 @@ export class ProposalService {
     formData.append("notes", proposal.notes);
 
     // Add the files to FormData if needed
-    files.forEach((file) => {
-      if (file.type.startsWith("image/")) {
-        formData.append("imageFile", file);
-      } else if (file.type === "application/pdf") {
-        formData.append("documentFile", file);
-      }
-    });
+    // files.forEach((file) => {
+    //   if (file.type.startsWith("image/")) {
+    //     formData.append("imageFile", file);
+    //   } else if (file.type === "application/pdf") {
+    //     formData.append("documentFile", file);
+    //   }
+    // });
 
     this.http.put(`${this.dataPath}/${proposal.id}`, formData).subscribe({
       next: () => {
