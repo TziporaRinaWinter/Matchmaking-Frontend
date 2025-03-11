@@ -70,7 +70,7 @@ export class ProposalService {
     //   }
     // });
 
-    this.http.put(`${this.dataPath}/${proposal.id}`, formData).subscribe({
+    this.http.put(`${this.dataPath}/${proposal._id}`, formData).subscribe({
       next: () => {
         console.log("Proposal updated successfully");
         this.loadProposals();
