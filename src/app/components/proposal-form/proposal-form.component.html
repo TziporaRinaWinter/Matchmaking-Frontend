@@ -56,6 +56,24 @@
       dir="rtl"
     ></textarea>
   </div>
+  <div class="mb-4">
+    <label class="block mb-2">קובץ PDF/WORD:</label>
+    <input
+      type="file"
+      (change)="onFileChange($event, 'pdf')"
+      class="w-full p-2 border rounded"
+      dir="rtl"
+    />
+  </div>
+  <div class="mb-4">
+    <label class="block mb-2">תמונה:</label>
+    <input
+      type="file"
+      (change)="onFileChange($event, 'image')"
+      class="w-full p-2 border rounded"
+      dir="rtl"
+    />
+  </div>
   <div class="flex justify-end">
     <button
       type="submit"

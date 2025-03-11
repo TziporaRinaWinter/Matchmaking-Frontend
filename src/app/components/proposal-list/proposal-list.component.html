@@ -57,10 +57,15 @@
         <p><strong>שדכן:</strong> {{ proposal.shadchan }}</p>
         <p><strong>פרטים:</strong> {{ proposal.details }}</p>
         <p><strong>הערות:</strong> {{ proposal.notes }}</p>
+        <p *ngIf="proposal.documentFile">
+          <strong>קובץ PDF/WORD:</strong> {{ proposal.documentFile }}
+        </p>
+        <p *ngIf="proposal.imageFile">
+          <strong>תמונה:</strong> {{ proposal.imageFile.name }}
+        </p>
       </div>
     </div>
   </div>
-
   <div
     *ngIf="filteredProposals?.length === 0"
     class="text-center py-8 text-gray-500"

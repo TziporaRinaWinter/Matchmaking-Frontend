@@ -19,6 +19,8 @@ export class ProposalListComponent implements OnInit {
     shadchan: "",
     details: "",
     notes: "",
+    documentFile: undefined,
+    imageFile: undefined,
   };
   showForm = false;
   searchTerm = "";
@@ -66,6 +68,8 @@ export class ProposalListComponent implements OnInit {
       shadchan: "",
       details: "",
       notes: "",
+      documentFile: undefined,
+      imageFile: undefined,
     };
   }
 }
